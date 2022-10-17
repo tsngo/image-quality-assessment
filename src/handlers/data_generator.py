@@ -91,7 +91,11 @@ class TestDataGenerator(tf.keras.utils.Sequence):
         for i, sample in enumerate(batch_samples):
             # load and randomly augment image
             img_file = os.path.join(self.img_dir, '{}.{}'.format(sample['image_id'], self.img_format))
-            img = utils.load_image(img_file, self.img_load_dims)
+            try:
+                img = utils.load_image(img_file, self.img_load_dims)
+            except:
+                print(f"Unable to load {img_file}")
+                img = None
             if img is not None:
                 X[i, ] = img
 

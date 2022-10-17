@@ -36,7 +36,7 @@ def main(base_model_name, weights_file, image_source, predictions_file, img_form
         image_dir, samples = image_file_to_json(image_source)
     else:
         image_dir = image_source
-        samples = image_dir_to_json(image_dir, img_type='jpg')
+        samples = image_dir_to_json(image_dir, img_type=img_format)
 
     # build model and load weights
     nima = Nima(base_model_name, weights=None)
@@ -67,6 +67,7 @@ if __name__ == '__main__':
     parser.add_argument('-w', '--weights-file', help='path of weights file', required=True)
     parser.add_argument('-is', '--image-source', help='image directory or file', required=True)
     parser.add_argument('-pf', '--predictions-file', help='file with predictions', required=False, default=None)
+    parser.add_argument('-if', '--img-format', help='file format', required=False, default=None)
 
     args = parser.parse_args()
 
