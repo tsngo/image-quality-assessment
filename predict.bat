@@ -1,4 +1,6 @@
 @echo off
+SET DOCKER_IMAGE=nima-cpu
+SET BASE_MODEL_NAME=MobileNet
 :Loop
 IF "%~1"=="" GOTO Continue
 IF "%~1"=="--docker-image" (
@@ -31,6 +33,8 @@ GOTO Loop
 :Continue
 IF "%IMG_FORMAT%"=="" (
   SET IMG_FORMAT=png
+) ELSE (
+  SET IMG_FORMAT=%IMG_FORMAT:~1%
 )
 
 for /F %%i in ("%PREDICTIONS_FILE%") do SET BASENAME_PF=%%~nxi
